@@ -1,4 +1,4 @@
-package com.testcode.study.testCodeStudy.coffeshop;
+package com.testcode.study.testCodeStudy.unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.testcode.study.testCodeStudy.coffeshop.beverage.Americano;
-import com.testcode.study.testCodeStudy.coffeshop.beverage.Latte;
-import com.testcode.study.testCodeStudy.coffeshop.order.Order;
+import com.testcode.study.testCodeStudy.unit.beverage.Americano;
+import com.testcode.study.testCodeStudy.unit.beverage.Latte;
+import com.testcode.study.testCodeStudy.unit.order.Order;
 
 public class CafeKioskTest {
 

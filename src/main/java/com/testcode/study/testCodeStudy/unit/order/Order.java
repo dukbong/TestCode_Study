@@ -1,9 +1,9 @@
-package com.testcode.study.testCodeStudy.coffeshop.order;
+package com.testcode.study.testCodeStudy.unit.order;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.testcode.study.testCodeStudy.coffeshop.beverage.Beverage;
+import com.testcode.study.testCodeStudy.unit.beverage.Beverage;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

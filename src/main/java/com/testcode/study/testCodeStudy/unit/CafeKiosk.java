@@ -1,12 +1,12 @@
-package com.testcode.study.testCodeStudy.coffeshop;
+package com.testcode.study.testCodeStudy.unit;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.testcode.study.testCodeStudy.coffeshop.beverage.Beverage;
-import com.testcode.study.testCodeStudy.coffeshop.order.Order;
+import com.testcode.study.testCodeStudy.unit.beverage.Beverage;
+import com.testcode.study.testCodeStudy.unit.order.Order;
 
 import lombok.Getter;
 

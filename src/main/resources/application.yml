@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    default: local
+
+  datasource:
+    url: jdbc:h2:mem:~/cafeKioskApplication
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true # 이쁘게 나오게 만들기
+    defer-datasource-initialization: true # (2.5~) Hibernate 초기화 이후 data.sql 실행
+    # 매번 새로운 데이터 넣기 귀찮으니 data.sql 파일에 미리 몇가지 만들어 둔다.
+
+  h2:
+    console:
+      enabled: true
+      # localhost:port_number/h2-console 접속 [별도의 설치가 필요 없다.]
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: never
