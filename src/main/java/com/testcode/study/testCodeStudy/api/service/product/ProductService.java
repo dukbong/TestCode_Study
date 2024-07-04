@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Business Layer
+ *
+ * 1. 비즈니스 로직을 구현하는 역할
+ * 2. Persistence Layer와의 상호작용(Data를 읽고 쓰는 행위)을 통해 Business Logic을 전개시킨다.
+ * 3. ⭐트랜젝션을 보장해야한다.⭐
+ */
 @Service
 @RequiredArgsConstructor
 public class ProductService {
