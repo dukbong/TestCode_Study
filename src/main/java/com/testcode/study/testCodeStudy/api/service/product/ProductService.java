@@ -1,5 +1,6 @@
 package com.testcode.study.testCodeStudy.api.service.product;
 
+import com.testcode.study.testCodeStudy.api.controller.product.dto.request.ProductCreateRequest;
 import com.testcode.study.testCodeStudy.api.service.product.response.ProductResponse;
 import com.testcode.study.testCodeStudy.domain.product.Product;
 import com.testcode.study.testCodeStudy.domain.product.ProductRepository;
@@ -29,5 +30,26 @@ public class ProductService {
         return productList.stream()
                 .map(ProductResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    public ProductResponse createProduct(ProductCreateRequest request) {
+        String nextProductNumber = createNextProductNumber();
+        return ProductResponse.builder()
+                .productNumber(nextProductNumber)
+                .type(request.getType())
+                .sellingStatus(request.getSellingStatus())
+                .name(request.getName())
+                .price(request.getPrice())
+                .build();
+    }
+
+    private String createNextProductNumber() {
+        String latestProductNumber = productRepository.findLatestProductNumber();
+
+        int latestProductNumberInt = Integer.parseInt(latestProductNumber);
+        int nextProductNumberInt = latestProductNumberInt + 1;
+
+        return String.format("%03d", nextProductNumberInt);
+
     }
 }
