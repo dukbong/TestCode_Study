@@ -1,5 +1,6 @@
 package com.testcode.study.testCodeStudy.api.controller.product.dto.request;
 
+import com.testcode.study.testCodeStudy.domain.product.Product;
 import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
 import com.testcode.study.testCodeStudy.domain.product.ProductType;
 import jakarta.persistence.EnumType;
@@ -23,5 +24,15 @@ public class ProductCreateRequest {
         this.sellingStatus = sellingStatus;
         this.name = name;
         this.price = price;
+    }
+
+    public Product toEntity(String nextProductNumber) {
+        return Product.builder()
+                .productNumber(nextProductNumber)
+                .type(type)
+                .sellingStatus(sellingStatus)
+                .name(name)
+                .price(price)
+                .build();
     }
 }
