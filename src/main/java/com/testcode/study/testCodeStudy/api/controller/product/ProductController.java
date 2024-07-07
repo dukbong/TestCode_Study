@@ -24,7 +24,7 @@ public class ProductController {
     @PostMapping("/api/v1/products/new")
     public ApiResponse<ProductResponse> createProduct(@Valid @RequestBody ProductCreateRequest request) {
     	// @Valid를 붙여서 ProductCreateRequest에서 어노테이션으로 검증하고자 하는 것을 확인한다.
-        return ApiResponse.ok(productService.createProduct(request));
+        return ApiResponse.ok(productService.createProduct(request.toServiceRequest()));
     }
 
     @GetMapping("/api/v1/products/selling")

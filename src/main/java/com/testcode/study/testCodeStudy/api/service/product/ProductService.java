@@ -1,16 +1,18 @@
 package com.testcode.study.testCodeStudy.api.service.product;
 
-import com.testcode.study.testCodeStudy.api.controller.product.dto.request.ProductCreateRequest;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.testcode.study.testCodeStudy.api.service.product.request.ProductCreateServiceRequest;
 import com.testcode.study.testCodeStudy.api.service.product.response.ProductResponse;
 import com.testcode.study.testCodeStudy.domain.product.Product;
 import com.testcode.study.testCodeStudy.domain.product.ProductRepository;
 import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Business Layer
@@ -55,7 +57,7 @@ public class ProductService {
     // 동시성 이슈
     // 접속자가 많고 상품 등록을 많이 하면 UUID, 아니라면 DB에서 Unique 제약조건을 걸고 재시도 로직으로 처리
     @Transactional
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         String nextProductNumber = createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);

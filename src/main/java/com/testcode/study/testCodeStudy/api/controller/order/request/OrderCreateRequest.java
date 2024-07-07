@@ -6,18 +6,25 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.testcode.study.testCodeStudy.api.service.order.request.OrderCreateServiceRequest;
+
+import jakarta.validation.constraints.NotEmpty;
+
 @Getter
 @NoArgsConstructor
 public class OrderCreateRequest {
 
+	@NotEmpty(message = "상품 번호 리스트는 필수입니다.")
     private List<String> productNumbers;
 
     @Builder
     public OrderCreateRequest(List<String> productNumbers) {
         this.productNumbers = productNumbers;
-
-        for(String num : productNumbers) {
-            System.out.println(num);
-        }
+    }
+    
+    public OrderCreateServiceRequest toServiceRequest() {
+    	return OrderCreateServiceRequest.builder()
+    			.productNumbers(productNumbers)
+    			.build();
     }
 }

@@ -1,6 +1,15 @@
 package com.testcode.study.testCodeStudy.api.service.order;
 
-import com.testcode.study.testCodeStudy.api.controller.order.request.OrderCreateRequest;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.testcode.study.testCodeStudy.api.service.order.request.OrderCreateServiceRequest;
 import com.testcode.study.testCodeStudy.api.service.order.response.OrderResponse;
 import com.testcode.study.testCodeStudy.domain.order.Order;
 import com.testcode.study.testCodeStudy.domain.order.OrderRepository;
@@ -9,15 +18,8 @@ import com.testcode.study.testCodeStudy.domain.product.ProductRepository;
 import com.testcode.study.testCodeStudy.domain.product.ProductType;
 import com.testcode.study.testCodeStudy.domain.stock.Stock;
 import com.testcode.study.testCodeStudy.domain.stock.StockRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 
 @Transactional
 @Service
@@ -34,7 +36,7 @@ public class OrderService {
      *  재고 감소 문제는 동시성 고민이 필요하다.
      *  해결 방법으로는 optimistic lock, pessimistic lock ...
      */
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
 
         // Product
