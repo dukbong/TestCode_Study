@@ -7,6 +7,8 @@ import com.testcode.study.testCodeStudy.domain.product.ProductRepository;
 import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
 import com.testcode.study.testCodeStudy.domain.product.ProductType;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,23 @@ class ProductServiceTest {
 
     @Autowired
     private ProductRepository productRepository;
+    
+   
+    // BeforeAll과 BeforeEach는 잘 쓰지 않는다.
+    // 테스트 코드는 문서 같은 성격을 가지기 때문에 위에서 부터 차례대로 읽어 나갈 수 있어야 한다.
+    @BeforeAll
+    void beforeAll() {
+    	// before class
+    }
+    
+    @BeforeEach
+    void setUp() {
+    	// before method
+    	
+    	// 언제 사용할까?
+    	// 1. 각 테스트 입장에서 봤을때 아예 몰라도 테스트 내용을 이해하는데 문제가 없는가?
+    	// 2. 수정해도 모든 테스트에 영향을 주지 않는가?
+    }
 
     @AfterEach
     void tearDown() {
