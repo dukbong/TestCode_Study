@@ -16,3 +16,18 @@
 - if, for등을 이용하면 한 주제가 아닌 여러 주제에 대해 테스트 코드를 짜게 되는데 이는 올바르지 않은 테스트 코드 작성법이다.
 
 제어하지 못하는 것은 최대한 멀리 보내서 테스트 코드를 작성하기 좋게 만들어야 한다.
+
+--- 
+
+deleteAll()과 deleteAllInBatch()
+
+deleteAllInBatch 승
+- deleteAllInBatch()는 한번에 지우기 편하다.
+- deleteAll()은 Select 후 하나하나 delete한다. (쿼리가 많이 날아간다.)
+
+deleteAll() 승
+- deleteAllInBatch() 외래키를 가진 테이블을 생각하고 먼저 지워줘야한다.
+- deleteAll() 양방향 관계를 맺고 있다면 아무거나 먼저 지워도 연관 테이블까지 select 후 지우기 때문에 순서가 상관없다.
+
+결론
+- deleteAll()은 쿼리가 많이 나가는데 이는 결국 비용이기 때문에 deleteAllInBatch()를 사용하는것이 좋다.
