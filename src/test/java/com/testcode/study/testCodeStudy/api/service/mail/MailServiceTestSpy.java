@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.*;
  */
 // @Mock 처럼 어노테이션으로 만들 경우 MockitoExtension.class를 해줘야 한다.
 @ExtendWith(MockitoExtension.class)
-class MailServiceTest {
+class MailServiceTestSpy {
 
     @Spy
     private MailSendClient mailSendClient;
