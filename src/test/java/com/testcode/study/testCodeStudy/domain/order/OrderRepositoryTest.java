@@ -34,23 +34,30 @@ class OrderRepositoryTest {
         Product product3 = createProduct("003", ProductType.HANDMADE, ProductSellingStatus.HOLD, "팥빙수", 5000);
         productRepository.saveAll(List.of(product1, product2, product3));
 
-        Order order1 = Order.create(List.of(product1, product2), LocalDateTime.of(2023, 1, 17, 10, 0));
+        Order order1 = creatOrderWithBuilder(List.of(product1, product2), OrderStatus.PAYMENT_COMPLETED, LocalDateTime.of(2023, 1, 17, 10, 0));
         orderRepository.save(order1);
 
         Order order2 = Order.create(List.of(product3), LocalDateTime.of(2023, 1, 18, 16, 0));
         orderRepository.save(order2);
 
         // when
-        List<Order> orders = orderRepository.findOrdersBy(LocalDateTime.of(2023,1,17,10,0), LocalDateTime.of(2023,1,18,17,0),OrderStatus.INIT);
+        List<Order> orders = orderRepository.findOrdersBy(LocalDateTime.of(2023,1,17,10,0), LocalDateTime.of(2023,1,18,17,0),OrderStatus.PAYMENT_COMPLETED);
 
         // then
-        assertThat(orders).hasSize(2)
+        assertThat(orders).hasSize(1)
                 .extracting("registeredDateTime", "totalPrice")
                 .containsExactlyInAnyOrder(
-                        tuple(LocalDateTime.of(2023, 1, 17, 10, 0), 8500),
-                        tuple(LocalDateTime.of(2023, 1, 18, 16, 0), 5000)
+                        tuple(LocalDateTime.of(2023, 1, 17, 10, 0), 8500)
                 );
 
+    }
+
+    private static Order creatOrderWithBuilder(List<Product> products, OrderStatus orderStatus, LocalDateTime localDateTime) {
+        return Order.builder()
+                .products(products)
+                .orderStatus(orderStatus)
+                .registeredDateTime(localDateTime)
+                .build();
     }
 
     private Product createProduct(String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
