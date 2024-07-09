@@ -1,10 +1,10 @@
 package com.testcode.study.testCodeStudy.domain.product;
 
+import com.testcode.study.testCodeStudy.IntegrationTestSupport;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -15,13 +15,20 @@ import static org.assertj.core.api.Assertions.tuple;
  * 해당 TEST Code는 통합 테스트이다.
  */
 
-@ActiveProfiles("test") // application.yml 에서 test 환경으로 돌리겠다고 지정
-//// @SpringBootTest
-@DataJpaTest // JPA 관련 Bean만 주입하여 SpringBootTest 보다 가볍다.
-class ProductRepositoryTest {
+// @ActiveProfiles("test") // application.yml 에서 test 환경으로 돌리겠다고 지정
+// @SpringBootTest
+// @DataJpaTest // JPA 관련 Bean만 주입하여 SpringBootTest 보다 가볍다.
+// >>> 하지만 통합 테스트 환경을 위해 SpringBootTest로 하는것이 서버가 열리는 시간을 최소화 시킬 수 있다.
+// >>> 만약 DataJpaTest로 만들고 싶다면 새로운 상위 추상 클래스를 만들어주면 된다.
+class ProductRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @AfterEach
+    void tearDown() {
+        productRepository.deleteAllInBatch();
+    }
 
     @Test
     @DisplayName("원하는 판매상태를 가진 상품을 조회한다.")

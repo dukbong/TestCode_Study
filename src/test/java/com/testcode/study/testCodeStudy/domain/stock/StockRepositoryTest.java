@@ -1,8 +1,7 @@
 package com.testcode.study.testCodeStudy.domain.stock;
 
-import com.testcode.study.testCodeStudy.domain.product.Product;
-import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
-import com.testcode.study.testCodeStudy.domain.product.ProductType;
+import com.testcode.study.testCodeStudy.IntegrationTestSupport;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +11,17 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
-class StockRepositoryTest {
+//@DataJpaTest
+class StockRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private StockRepository stockRepository;
+
+    @AfterEach
+    void tearDown() {
+        stockRepository.deleteAllInBatch();
+    }
 
     @Test
     @DisplayName("상품 번호 리스트로 재고를 조회한다.")

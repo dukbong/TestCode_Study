@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
+import com.testcode.study.testCodeStudy.ControllerTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.testcode.study.testCodeStudy.api.controller.order.request.OrderCreateRequest;
 import com.testcode.study.testCodeStudy.api.service.order.OrderService;
 
-@WebMvcTest(controllers = OrderController.class)
-public class OrderControllerTest {
+//@WebMvcTest(controllers = OrderController.class)
+public class OrderControllerTest extends ControllerTestSupport {
 
-	@Autowired
-	private MockMvc mockMvc;
-	
-	@Autowired
-	private ObjectMapper objectMapper;
-	
-	@MockBean
-	private OrderService orderService;
+//	@Autowired
+//	private MockMvc mockMvc;
+//
+//	@Autowired
+//	private ObjectMapper objectMapper;
+//
+//	@MockBean
+//	private OrderService orderService;
 	
 	@DisplayName("신규 주문을 등록한다.")
 	@Test

@@ -1,7 +1,6 @@
 package com.testcode.study.testCodeStudy.api.service.order;
 
-import com.testcode.study.testCodeStudy.api.service.mail.MailService;
-import com.testcode.study.testCodeStudy.client.mail.MailSendClient;
+import com.testcode.study.testCodeStudy.IntegrationTestSupport;
 import com.testcode.study.testCodeStudy.domain.history.mail.MailSendHistory;
 import com.testcode.study.testCodeStudy.domain.history.mail.MailSendHistoryRepository;
 import com.testcode.study.testCodeStudy.domain.order.Order;
@@ -16,8 +15,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,8 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-class OrderStatisticsServiceTest {
+//@SpringBootTest
+class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderStatisticsService orderStatisticsService;
@@ -41,8 +38,11 @@ class OrderStatisticsServiceTest {
     @Autowired
     private MailSendHistoryRepository mailSendHistoryRepository;
 
-    @MockBean
-    private MailSendClient mailSendClient;
+    // MockBean은 다른 환경으로 인식하여 테스트 통합 환경으로 만들어도 새로운 서버가 열린다.
+    // 해결 방법 1. IntegrationTestSupport 안에서 선언해준다. [protected] - 다른 테스트 환경에서도 열린다.
+    // 해결 방법 1에서 다른 테스트 환경에서도 열리는게 싫다면 MockBean처리 된 테스트를 따로 분리하여 진행하는 방법도 있다.
+//    @MockBean
+//    private MailSendClient mailSendClient;
 
     @AfterEach
     void tearDown() {

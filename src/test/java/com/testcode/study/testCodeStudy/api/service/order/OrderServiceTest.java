@@ -1,5 +1,6 @@
 package com.testcode.study.testCodeStudy.api.service.order;
 
+import com.testcode.study.testCodeStudy.IntegrationTestSupport;
 import com.testcode.study.testCodeStudy.api.controller.order.request.OrderCreateRequest;
 import com.testcode.study.testCodeStudy.api.service.order.response.OrderResponse;
 import com.testcode.study.testCodeStudy.domain.order.OrderRepository;
@@ -13,19 +14,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 //@Transactional
-@SpringBootTest
-class OrderServiceTest {
+//@SpringBootTest
+class OrderServiceTest extends IntegrationTestSupport { // 테스트 환경 통합으로 Spring Boot 서버 실행 횟수를 줄여서 비용을 낮춘다.
 
     @Autowired
     private ProductRepository productRepository;

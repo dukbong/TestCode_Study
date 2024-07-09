@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
+import com.testcode.study.testCodeStudy.ControllerTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +24,19 @@ import com.testcode.study.testCodeStudy.api.service.product.response.ProductResp
 import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
 import com.testcode.study.testCodeStudy.domain.product.ProductType;
 
-@WebMvcTest(controllers = ProductController.class)
+//@WebMvcTest(controllers = ProductController.class)
 // Controller 관련 빈만 로드 하는 가벼운 환경
 // Controller 테스트에서 가장 중요한것은 파라미터 유효성 검사를 하는 것이다.
 // --> Spring Bean Validation
-public class ProductControllerTest {
+public class ProductControllerTest extends ControllerTestSupport {
 
-	@Autowired
-	private MockMvc mockMvc;
-	@Autowired
-	private ObjectMapper objectMapper;
-
-	@MockBean
-	private ProductService productService;
+//	@Autowired
+//	private MockMvc mockMvc;
+//	@Autowired
+//	private ObjectMapper objectMapper;
+//
+//	@MockBean
+//	private ProductService productService;
 
 	@DisplayName("신규 상품을 등록한다.")
 	@Test

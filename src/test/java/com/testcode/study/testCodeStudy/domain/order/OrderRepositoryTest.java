@@ -1,14 +1,16 @@
 package com.testcode.study.testCodeStudy.domain.order;
 
+import com.testcode.study.testCodeStudy.IntegrationTestSupport;
+import com.testcode.study.testCodeStudy.domain.orderproduct.OrderProduct;
+import com.testcode.study.testCodeStudy.domain.orderproduct.OrderProductRepository;
 import com.testcode.study.testCodeStudy.domain.product.Product;
 import com.testcode.study.testCodeStudy.domain.product.ProductRepository;
 import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
 import com.testcode.study.testCodeStudy.domain.product.ProductType;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,14 +18,23 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-@ActiveProfiles("test")
-@DataJpaTest
-class OrderRepositoryTest {
+//@ActiveProfiles("test")
+//@DataJpaTest
+class OrderRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private OrderProductRepository orderProductRepository;
+
+    @AfterEach
+    void tearDown() {
+        orderProductRepository.deleteAllInBatch();
+        orderRepository.deleteAllInBatch();
+        productRepository.deleteAllInBatch();
+    }
 
     @DisplayName("특정 날짜에 결제 완료된 주문을 조회할 수 있다.")
     @Test

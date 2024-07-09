@@ -1,5 +1,6 @@
 package com.testcode.study.testCodeStudy.api.service.product;
 
+import com.testcode.study.testCodeStudy.IntegrationTestSupport;
 import com.testcode.study.testCodeStudy.api.controller.product.dto.request.ProductCreateRequest;
 import com.testcode.study.testCodeStudy.api.service.product.response.ProductResponse;
 import com.testcode.study.testCodeStudy.domain.product.Product;
@@ -7,23 +8,18 @@ import com.testcode.study.testCodeStudy.domain.product.ProductRepository;
 import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
 import com.testcode.study.testCodeStudy.domain.product.ProductType;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ProductServiceTest {
+//@ActiveProfiles("test")
+//@SpringBootTest
+class ProductServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductService productService;
@@ -34,19 +30,18 @@ class ProductServiceTest {
    
     // BeforeAll과 BeforeEach는 잘 쓰지 않는다.
     // 테스트 코드는 문서 같은 성격을 가지기 때문에 위에서 부터 차례대로 읽어 나갈 수 있어야 한다.
-    @BeforeAll
-    void beforeAll() {
+ //   @BeforeAll
+ //   void beforeAll() {
     	// before class
-    }
-    
-    @BeforeEach
-    void setUp() {
+ //   }
+ //   @BeforeEach
+ //   void setUp() {
     	// before method
     	
     	// 언제 사용할까?
     	// 1. 각 테스트 입장에서 봤을때 아예 몰라도 테스트 내용을 이해하는데 문제가 없는가?
     	// 2. 수정해도 모든 테스트에 영향을 주지 않는가?
-    }
+ //   }
 
     @AfterEach
     void tearDown() {
