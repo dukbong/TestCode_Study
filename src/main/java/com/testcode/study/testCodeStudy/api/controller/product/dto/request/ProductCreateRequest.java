@@ -32,6 +32,7 @@ public class ProductCreateRequest {
 	@Positive(message = "상품 가격은 양수여야 합니다.")
     private int price;
 
+    // 현재 해당 Builder는 테스트에서만 사용하는 코드인다.
     @Builder
     public ProductCreateRequest(ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
         this.type = type;
