@@ -31,3 +31,8 @@ deleteAll() 승
 
 결론
 - deleteAll()은 쿼리가 많이 나가는데 이는 결국 비용이기 때문에 deleteAllInBatch()를 사용하는것이 좋다.
+
+---
+private 메소드의 테스트 할 필요 없다!
+- 이유는 public 메소드를 테스트할때 테스트가 되기 때문이다.
+- 만약 하고 싶다면 객체를 분리할 시점인가를 생각해보면 된다. (ProductNumberFactory.java)

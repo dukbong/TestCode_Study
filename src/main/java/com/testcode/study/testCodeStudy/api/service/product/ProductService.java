@@ -45,6 +45,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductNumberFactory productNumberFactory;
 
     public List<ProductResponse> getSellingProducts() {
         List<Product> productList = productRepository.findAllBySellingStatusIn(ProductSellingStatus.forDisPlay());
@@ -58,7 +59,7 @@ public class ProductService {
     // 접속자가 많고 상품 등록을 많이 하면 UUID, 아니라면 DB에서 Unique 제약조건을 걸고 재시도 로직으로 처리
     @Transactional
     public ProductResponse createProduct(ProductCreateServiceRequest request) {
-        String nextProductNumber = createNextProductNumber();
+        String nextProductNumber = productNumberFactory.createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);
         Product savedProduct = productRepository.save(product);
@@ -66,17 +67,18 @@ public class ProductService {
         return ProductResponse.of(savedProduct);
     }
 
-    private String createNextProductNumber() {
-        String latestProductNumber = productRepository.findLatestProductNumber();
-
-        if(latestProductNumber == null) {
-            return "001";
-        }
-
-        int latestProductNumberInt = Integer.parseInt(latestProductNumber);
-        int nextProductNumberInt = latestProductNumberInt + 1;
-
-        return String.format("%03d", nextProductNumberInt);
-
-    }
+//    별도의 클래스로 분리 (ProductNumberFactory)
+//    private String createNextProductNumber() {
+//        String latestProductNumber = productRepository.findLatestProductNumber();
+//
+//        if(latestProductNumber == null) {
+//            return "001";
+//        }
+//
+//        int latestProductNumberInt = Integer.parseInt(latestProductNumber);
+//        int nextProductNumberInt = latestProductNumberInt + 1;
+//
+//        return String.format("%03d", nextProductNumberInt);
+//
+//    }
 }
