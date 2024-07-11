@@ -8,3 +8,13 @@ include::{snippets}/product-create/request-fields.adoc[]
 ==== HTTP Response
 include::{snippets}/product-create/http-response.adoc[]
 include::{snippets}/product-create/response-fields.adoc[]
+
+=== 신규 상품 등록 시 타입 필수
+
+==== HTTP Request
+include::{snippets}/product-create-isEmpty-type/http-request.adoc[]
+include::{snippets}/product-create-isEmpty-type/request-fields.adoc[]
+
+==== HTTP Response
+include::{snippets}/product-create-isEmpty-type/http-response.adoc[]
+include::{snippets}/product-create-isEmpty-type/response-fields.adoc[]
