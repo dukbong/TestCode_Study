@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 
-//@SpringBootTest
 @ExtendWith(RestDocumentationExtension.class)
 public abstract class RestDocSupport {
 
@@ -28,5 +27,5 @@ public abstract class RestDocSupport {
                 .build();
     }
 
-    protected abstract Object initController();
+     protected abstract Object initController();
 }
