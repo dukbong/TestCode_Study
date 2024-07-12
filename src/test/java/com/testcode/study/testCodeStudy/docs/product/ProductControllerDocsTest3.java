@@ -1,14 +1,8 @@
 package com.testcode.study.testCodeStudy.docs.product;
 
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
+import com.testcode.study.testCodeStudy.api.controller.product.dto.request.ProductCreateRequest;
+import com.testcode.study.testCodeStudy.docs.RestDocSupport2;
+import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
 import com.testcode.study.testCodeStudy.domain.product.ProductType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,18 +12,19 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.testcode.study.testCodeStudy.api.controller.product.dto.request.ProductCreateRequest;
-import com.testcode.study.testCodeStudy.docs.RestDocSupport2;
-import com.testcode.study.testCodeStudy.domain.product.ProductSellingStatus;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-public class ProductControllerDocsTest2 extends RestDocSupport2 {
+public class ProductControllerDocsTest3 extends RestDocSupport2 {
 
-    @DisplayName("신규 상품을 등록할 때 상품 타입은 필수값이다.")
+    @DisplayName("신규 상품을 등록할 때 상품 판매상태는 필수값이다.")
     @Test
-    void createProductWithoutType() throws Exception {
+    void createProductWithoutSellingType() throws Exception {
         // given
         ProductCreateRequest request = ProductCreateRequest.builder()
-                .sellingStatus(ProductSellingStatus.SELLING)
+                .type(ProductType.HANDMADE)
                 .name("아메리카노")
                 .price(4000)
                 .build();
@@ -44,9 +39,9 @@ public class ProductControllerDocsTest2 extends RestDocSupport2 {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("400"))
                 .andExpect(jsonPath("$.status").value("BAD_REQUEST"))
-                .andExpect(jsonPath("$.message").value("상품 타입은 필수입니다."))
+                .andExpect(jsonPath("$.message").value("상품 판매상태는 필수입니다."))
                 .andExpect(jsonPath("$.data").isEmpty())
-                .andDo(document("product-create-isEmpty-type",
+                .andDo(document("product-create-isEmpty-sellingStatus",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
 
@@ -54,6 +49,7 @@ public class ProductControllerDocsTest2 extends RestDocSupport2 {
                                 fieldWithPath("type").type(JsonFieldType.STRING)
                                         .description("상품 타입"),
                                 fieldWithPath("sellingStatus").type(JsonFieldType.STRING)
+                                        .optional()
                                         .description("상품 판매 상태"),
                                 fieldWithPath("name").type(JsonFieldType.STRING)
                                         .description("상품 이름"),
